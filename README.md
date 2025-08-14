@@ -1,26 +1,33 @@
 # MoveMinute — Multi-Activity Exercise Tracker 🏃
 
-A tiny Streamlit app to log diverse activities (run, hike, climb, badminton, etc.), see weekly totals, track simple PRs, and stay consistent.
+A simple and private Streamlit app to log all kinds of physical activities — from running and hiking to rock climbing, badminton, swimming, and more.  
+Stay consistent, track your progress, and keep your data to yourself.
 
 ## ✨ Features
-- Quick log: date, activity, duration, optional distance, intensity, notes
-- Dashboard: last 14 days chart, activity breakdown
-- Personal Records: longest session; longest run distance
-- Weekly goal with progress bar
-- CSV storage + export button
-- High-contrast, keyboard-friendly UI
+- **Quick logging**: Date, activity type, duration (minutes), optional distance, and personal notes
+- **Dashboard**: Last 14 days chart & activity breakdown
+- **Personal records**: Longest session & longest run distance
+- **Offline-friendly**: Local CSV storage with export option
+- **Accessible UI**: High-contrast design & keyboard-friendly navigation
 
 ## 🛠 Tech Stack
-- Python, Streamlit, pandas
-- Local CSV (`exercise_log.csv`) for storage
+- **Backend/UI**: Python + Streamlit
+- **Data handling**: pandas
+- **Storage**: Local CSV file (`exercise_log.csv`)
 
 ## 🚀 Quick Start
 ```bash
+# Clone the repository
+git clone https://github.com/WendyIcyV5/moveminute-exercise-tracker.git
+cd moveminute-exercise-tracker
+
+# Create and activate virtual environment
 python -m venv .venv
 # Windows PowerShell:
 .venv\Scripts\Activate.ps1
 # macOS/Linux:
-# source .venv/bin/activate
+source .venv/bin/activate
 
+# Install dependencies and run
 pip install -r requirements.txt
 streamlit run app.py
