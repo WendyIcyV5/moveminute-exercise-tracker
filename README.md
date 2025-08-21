@@ -5,8 +5,8 @@ Stay consistent, track your progress, and keep your data to yourself.
 
 ## ✨ Features
 - **Quick logging**: Date, activity type, duration (minutes), optional distance, and personal notes
-- **Dashboard**: Last 14 days chart & activity breakdown
-- **Personal records**: Longest session & longest run distance
+- **Dashboard**: activity chart & breakdown
+- **Personal records**: total minutes in the last 7 days & total running distance in the last 30 days
 - **Offline-friendly**: Local CSV storage with export option
 - **Accessible UI**: High-contrast design & keyboard-friendly navigation
 

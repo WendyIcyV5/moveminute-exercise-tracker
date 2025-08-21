@@ -88,7 +88,7 @@ elif page == "Dashboard":
     else:
         # Parse & sort dates
         df["date"] = pd.to_datetime(df["date"], errors="coerce")
-        df = df.sort_values("date", ascending=True)
+        df = df.sort_values("date", ascending=False)
 
         # Display metrics (keep your existing ones here)
         today = datetime.now().date()
