@@ -119,35 +119,43 @@ elif page == "Dashboard":
 
         st.metric("Running Distance (last 30d)", f"{running_distance_30d:.2f} mi")
 
+        # Ensure required columns exist (even if CSV is empty or older schema)
+        for col in ["date", "activity", "duration_min", "distance_miles", "notes"]:
+            if col not in df:
+                df[col] = pd.NA
+
+        # ---- Parse & coerce types for data_editor ----
+        df_display = df.copy()
+
+        # Dates must be datetime64[ns] for DateColumn
+        df_display["date"] = pd.to_datetime(df_display["date"], errors="coerce")
+
+        # Numbers must be numeric (NaN is fine for blanks)
+        df_display["duration_min"]   = pd.to_numeric(df_display["duration_min"], errors="coerce")
+        df_display["distance_miles"] = pd.to_numeric(df_display["distance_miles"], errors="coerce")
+
+        # Text columns should be strings (not floats/objects with NaN)
+        df_display["activity"] = df_display["activity"].astype("string").fillna("")
+        df_display["notes"]    = df_display["notes"].astype("string").fillna("")
+
+        # Optional: sort as you like
+        df_display = df_display.sort_values("date", ascending=True)
 
         st.data_editor(
             df_display,
             hide_index=True,
             use_container_width=True,
-            disabled=True,  # read-only table
+            disabled=True,
             column_order=["date", "activity", "duration_min", "distance_miles", "notes"],
             column_config={
-                "date": st.column_config.DateColumn(
-                    "Date",
-                    format="YYYY-MM-DD"
-                ),
+                "date": st.column_config.DateColumn("Date", format="YYYY-MM-DD"),
                 "activity": st.column_config.TextColumn("Activity"),
-                "duration_min": st.column_config.NumberColumn(
-                    "Duration (min)",
-                    step=5
-                ),
-                "distance_miles": st.column_config.NumberColumn(
-                    "Distance (mi)",
-                    step=0.1,
-                    format="%.2f"
-                ),
-                "notes": st.column_config.TextColumn(
-                    "Notes",
-                    width="large"  # "small" | "medium" | "large"
-                    # (Text will wrap within the column.)
-                ),
+                "duration_min": st.column_config.NumberColumn("Duration (min)", step=5),
+                "distance_miles": st.column_config.NumberColumn("Distance (mi)", step=0.1, format="%.2f"),
+                "notes": st.column_config.TextColumn("Notes", width="large"),
             },
         )
+
 
 # --- About ---
 else:
